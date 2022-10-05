@@ -13,10 +13,10 @@ bool set_(int x, int y, int type, int delta) {
  	for(int i = 0; i < 3; i++) {
 		int nx = x + coverType[type][i][0];
 		int ny = y + coverType[type][i][1];
-		if(nx < 0 || nx >= h || ny < 0 || ny >= w) return false;
-		else if((board[nx][ny] += delta) > 1) return false;
+		if(nx < 0 || nx >= h || ny < 0 || ny >= w) ok = false;
+		if((board[nx][ny] += delta) > 1) ok =  false;
 	}
-	return ok;
+	return true;
 }
 int cover() {
 	int ret = 0;
