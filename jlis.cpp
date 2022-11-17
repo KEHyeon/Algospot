@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-const long long MIN = -10000000;
+const long long MIN = numeric_limits<long long>::min();
 int alen, blen;
 int A[100];
 int B[100];
