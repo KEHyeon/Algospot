@@ -1,20 +1,26 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-
+const int MOD = 1000000007;
 int n, memo[101];
-int solve(int n) {
-    if(n == 1 || n == 0) return 1;
-    int &ret = memo[n];
+int tiling(int x) {
+    if(x == 1 || x == 0) return 1;
+    int &ret = memo[x];
     if(ret != 0) return ret;
-    ret += solve(n - 1);
-    ret += solve(n - 2);
+    ret = (tiling(x - 1) + tiling(x - 2)) % MOD;
+    return ret;
+}
+int asymtiling(int x) {
+    if(x % 2 == 1) return (tiling(x) - tiling(x / 2) + MOD) % MOD;
+    int ret = tiling(x);
+    ret = (ret - tiling(x / 2) + MOD) % MOD;
+    ret = (ret - tiling(x/2-1) + MOD) % MOD;
     return ret;
 }
 int main() {
     int tc; cin >> tc;
     while(tc--) {
         cin >> n;
-        cout << solve(n) - 2 - (n % 2 == 0) << '\n';
+        cout << asymtiling(n) << '\n';
     }
 }
